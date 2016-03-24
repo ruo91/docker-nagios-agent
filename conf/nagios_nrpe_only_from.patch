@@ -1,0 +1,36 @@
+# Maintainer: Yongbok Kim (ybkim@rockplace.co.kr)
+--- subcomponents/install.origin	2016-03-25 03:19:34.133611638 +0900
++++ subcomponents/install	2016-03-25 03:22:44.603608413 +0900
+@@ -18,29 +18,8 @@
+ fi
+ chown -R nagios:nagios /usr/local/nagios/var/spool
+ 
+-XINETD_ALLOW=$(sed -n '/only_from/ s/.*= *//p' /etc/xinetd.d/nrpe)
+-cat <<-IPs_HERE; printf '### %-72s ###\n' $XINETD_ALLOW; cat <<-EOF
+-
+-
+-	################################################################################
+-	###                                                                          ###
+-	### NRPE is currently set to allow connections only from these IP addresses: ###
+-	###                                                                          ###
+-IPs_HERE
+-	###                                                                          ###
+-	### If you would like to change this list, enter all IP addresses to allow,  ###
+-	### separated by spaces only, and then press Enter.                          ###
+-	### (Put the address(es) of your Nagios XI servers(s) here.)                 ###
+-	###                                                                          ###
+-	################################################################################
+-
+-EOF
+-
+-read -p "Allow from:  " ALLOW_INPUT
+-if [ "$ALLOW_INPUT" != "" ]; then
+-	sed -i "s~.*only_from.*~\tonly_from\t= $ALLOW_INPUT~" /etc/xinetd.d/nrpe
+-fi
+-echo
++# Change only_from
++sed -i 's/127.0.0.1/0.0.0.0/g' /etc/xinetd.d/nrpe
++sed -i 's/127.0.0.1/0.0.0.0/g' /etc/xinetd.d/nsca
+ 
+ if [ ! `command -v systemctl` ]; then
+     service xinetd restart
