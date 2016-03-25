@@ -1,7 +1,6 @@
-# Maintainer: Yongbok Kim (ybkim@rockplace.co.kr)
---- subcomponents/install.origin	2016-03-25 03:19:34.133611638 +0900
-+++ subcomponents/install	2016-03-25 03:22:44.603608413 +0900
-@@ -18,29 +18,8 @@
+--- subcomponents/install.origin	2016-03-25 18:36:05.023680532 +0900
++++ subcomponents/install	2016-03-25 18:36:59.647679607 +0900
+@@ -18,29 +18,9 @@
  fi
  chown -R nagios:nagios /usr/local/nagios/var/spool
  
